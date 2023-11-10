@@ -20,6 +20,7 @@ const CsvUploader: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [fileInvalid, setFileInvalid] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [messageError, setMessageHere] = useState<string>('');
 
     const uploadFile = async () => {
         try {
@@ -28,11 +29,13 @@ const CsvUploader: React.FC = () => {
                 formData.append('file', file);
 
                 const response = await axios.post('http://localhost:3000/api/files', formData);
+                console.log(response)
 
                 if (response.status === 200) {
                     await fetchUsersData();
                     setFileInvalid(false);
                 } else {
+                    console.log(response)
                     handleFileUploadError(response.data.message);
                 }
             }
@@ -54,6 +57,7 @@ const CsvUploader: React.FC = () => {
     };
 
     const handleFileUploadError = (errorMessage: string) => {
+        setMessageHere(errorMessage);
         console.error('File upload error:', errorMessage);
         setFileInvalid(true);
     };
@@ -92,7 +96,7 @@ const CsvUploader: React.FC = () => {
                 </Div>
             </Toolbar>
 
-            {fileInvalid && <FileInvalidMessage />}
+            {fileInvalid && <FileInvalidMessage errorMessage={messageError} />}
 
             <Body>
                 {csvData.map((row, index) => (

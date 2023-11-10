@@ -1,10 +1,13 @@
-// FileInvalidMessage.tsx
 import React from 'react';
 
-const FileInvalidMessage: React.FC = () => {
+interface FileInvalidMessageProps {
+  errorMessage: string;
+}
+
+const FileInvalidMessage: React.FC<FileInvalidMessageProps> = ({ errorMessage }) => {
   return (
     <div className="alert alert-danger" role="alert">
-      The uploaded file is failed. Please try again.
+      {errorMessage}
     </div>
   );
 };
