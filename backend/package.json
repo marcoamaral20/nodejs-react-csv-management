@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Home test to Shaw and Partners - Backend",
+  "main": "server.ts",
+  "scripts": {
+    "start": "npx ts-node src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.10",
+    "@types/node": "^20.9.0",
+    "csv-parser": "^3.0.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
