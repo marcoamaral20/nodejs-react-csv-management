@@ -1,15 +1,16 @@
 import { Request, Response, Router } from 'express';
 import { Readable } from 'stream';
+import multer from 'multer';
 import { processCSV } from '../csvProcessor/csvProcessor';
 import { csvType } from '../interface/csv.interface';
-import multer from 'multer';
+import { validateFileUpload } from './middleware/uploadValidator';
 
 const multerConfig = multer()
 const router = Router();
 
 const csvData: csvType[] = [];
 
-router.post('/api/files', multerConfig.single('file'), async (request: Request, response: Response) => {
+router.post('/api/files', multerConfig.single('file'), validateFileUpload, async (request: Request, response: Response) => {
     try {
         const { file } = request
 
@@ -17,10 +18,9 @@ router.post('/api/files', multerConfig.single('file'), async (request: Request, 
             return response.status(400).json({ message: 'No file provided.' });
         }
 
-        if (file.mimetype !== 'text/csv') {
-            return response.status(400).json({ message: 'Invalid file format. Please upload a CSV file.' });
+        if (csvData.length > 0) {
+            return response.status(409).json({ message: 'Data already exists in the database' });
         }
-
 
         const readableStream = new Readable();
         readableStream.push(file.buffer);
@@ -45,10 +45,6 @@ router.get('/api/users', (req: Request, res: Response) => {
         }
 
         if (!query) {
-            return res.status(200).json({ data: csvData });
-        }
-
-        if (query === 'all') {
             return res.status(200).json({ data: csvData });
         }
 
