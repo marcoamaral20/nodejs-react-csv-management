@@ -4,7 +4,8 @@
   "description": "Home test to Shaw and Partners - Backend",
   "main": "server.ts",
   "scripts": {
-    "start": "npx ts-node src/server.ts"
+    "start": "npx ts-node src/server.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,12 @@
     "sqlite3": "^5.1.6",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.8",
+    "@types/supertest": "^2.0.16",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1"
   }
 }

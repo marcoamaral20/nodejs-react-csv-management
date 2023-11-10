@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { Readable } from 'stream';
 import { processCSV } from '../csvProcessor/csvProcessor';
 import { csvType } from '../interface/csv.interface';
 import multer from 'multer';
@@ -20,8 +21,13 @@ router.post('/api/files', multerConfig.single('file'), async (request: Request, 
             return response.status(400).json({ message: 'Invalid file format. Please upload a CSV file.' });
         }
 
-        const fileContent = file.buffer.toString('utf8');
-        await processCSV(fileContent, csvData);
+
+        const readableStream = new Readable();
+        readableStream.push(file.buffer);
+        readableStream.push(null);
+
+        processCSV(readableStream, csvData);
+
 
         return response.status(200).json({ message: 'The file was uploaded successfully.' });
     } catch (error) {

@@ -1,31 +1,21 @@
-import csvParser from 'csv-parser';
-import { csvType } from '../interface/csv.interface';
+import readline from "readline"
+import { csvType } from "../interface/csv.interface"
 
-export const processCSV = (fileContent: string, csvData: csvType[]): void => {
-    let isFirstRow = true;
+export const processCSV = async (readableFile: any, csvData: csvType[]) => {
+    const data = readline.createInterface({
+        input: readableFile,
+    })
 
-    csvParser({ headers: true })
-        .on('data', (row: { [key: string]: string }) => {
-            if (isFirstRow) {
-                isFirstRow = false;
-                return;
-            }
-
-            const rowData: csvType = {
-                name: Object.values(row)[0],
-                city: Object.values(row)[1],
-                country: Object.values(row)[2],
-                favorite_sport: Object.values(row)[3],
-            };
-
-            csvData.push(rowData);
+    for await (const line of data) {
+        if (line.includes('name') || line.includes('city') || line.includes('country') || line.includes('favorite_sport')) {
+            continue
+        }
+        const row = line.split(',')
+        csvData.push({
+            name: row[0].trim(),
+            city: row[1].trim(),
+            country: row[2].trim(),
+            favorite_sport: row[3].trim(),
         })
-        .on('end', () => {
-            console.log('CSV processing complete');
-        })
-        .on('error', (error) => {
-            console.error('Error processing CSV:', error);
-            throw error;
-        })
-        .write(fileContent);
-};
+    }
+}
