@@ -20,10 +20,10 @@ describe('Router Tests', () => {
         expect(response.body.message).toBe('The file was uploaded successfully.');
     });
 
-    test('POST /api/files - Failed file upload', async () => {
+    test('POST /api/files - Invalid CSV file upload', async () => {
         const response = await request(app)
             .post('/api/files')
-            .attach('file', Buffer.from('name,city,country,favorite_sport\nJohn Doe,New York,USA,Basketball'));
+            .attach('file', Buffer.from('1,2,3,4\nJohn Doe,New York,USA,Basketball'));
 
         expect(response.status).toBe(400);
     });

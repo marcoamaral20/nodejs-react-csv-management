@@ -20,4 +20,17 @@ describe('CSV Processor Tests', () => {
             { name: 'Jane Smith', city: 'London', country: 'UK', favorite_sport: 'Football' },
         ]);
     });
+
+    test('processCSV - Process empty CSV data', async () => {
+        const csvData: csvType[] = [];
+        const csvContent = '';
+
+        const readableStream = new Readable();
+        readableStream.push(csvContent);
+        readableStream.push(null);
+
+        await processCSV(readableStream, csvData);
+
+        expect(csvData).toEqual([]);
+    })
 });

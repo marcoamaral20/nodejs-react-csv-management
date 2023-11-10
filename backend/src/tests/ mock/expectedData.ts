@@ -1,4 +1,4 @@
-import { csvType } from '../interface/csv.interface';
+import { csvType } from '../../interface/csv.interface';
 
 export const expectedCSVData: csvType[] = [
     {
