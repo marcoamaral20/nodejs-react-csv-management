@@ -20,6 +20,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileChange }) => {
                     type="file"
                     className="form-control"
                     id="custom-file"
+                    data-testid="custom-file"
                     accept=".csv"
                     onChange={handleFileChange}
                 />

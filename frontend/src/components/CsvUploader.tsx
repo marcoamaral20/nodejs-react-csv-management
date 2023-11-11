@@ -19,7 +19,6 @@ const CsvUploader: React.FC = () => {
     const [csvData, setCsvData] = useState<any[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [fileInvalid, setFileInvalid] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
     const [messageError, setMessageHere] = useState<string>('');
 
     const uploadFile = async () => {
@@ -29,13 +28,11 @@ const CsvUploader: React.FC = () => {
                 formData.append('file', file);
 
                 const response = await axios.post('http://localhost:3000/api/files', formData);
-                console.log(response)
 
                 if (response.status === 200) {
                     await fetchUsersData();
                     setFileInvalid(false);
                 } else {
-                    console.log(response)
                     handleFileUploadError(response.data.message);
                 }
             }
@@ -46,27 +43,21 @@ const CsvUploader: React.FC = () => {
 
     const fetchUsersData = async () => {
         try {
-            setLoading(true);
             const response = await axios.get(`http://localhost:3000/api/users?q=${searchTerm}`);
             setCsvData(response.data.data || []);
         } catch (error: any) {
             handleFetchDataError(error);
-        } finally {
-            setLoading(false);
         }
     };
 
     const handleFileUploadError = (errorMessage: string) => {
         setMessageHere(errorMessage);
-        console.error('File upload error:', errorMessage);
         setFileInvalid(true);
     };
 
     const handleFetchDataError = (error: any) => {
         if (error.response && error.response.status === 400) {
             handleFileUploadError(error.response.data.message);
-        } else {
-            console.error('Error fetching CSV data:', error.message);
         }
     };
 
@@ -86,14 +77,11 @@ const CsvUploader: React.FC = () => {
                 </Title>
                 <Div>
                     <FileUploader onFileChange={setFile} />
-                    {loading ? (
-                        <Spinner animation="border" variant="primary" />
-                    ) : (
-                        <Button variant="primary" onClick={uploadFile} disabled={!file}>
-                            Upload
-                        </Button>
-                    )}
+                    <Button variant="primary" onClick={uploadFile} data-testid="upload-button" disabled={!file}>
+                        Upload
+                    </Button>
                 </Div>
+
             </Toolbar>
 
             {fileInvalid && <FileInvalidMessage errorMessage={messageError} />}
