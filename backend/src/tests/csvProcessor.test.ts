@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import { csvType } from '../interface/csv.interface';
-import { processCSV } from '../csvProcessor/csvProcessor';
+import { processCSV } from '../service/csvProcessor';
 
 describe('CSV Processor Tests', () => {
     test('processCSV - Process CSV data', async () => {

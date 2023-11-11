@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { Readable } from 'stream';
 import multer from 'multer';
-import { processCSV } from '../csvProcessor/csvProcessor';
+import { processCSV } from '../service/csvProcessor';
 import { csvType } from '../interface/csv.interface';
 import { validateFileUpload } from './middleware/uploadValidator';
 
