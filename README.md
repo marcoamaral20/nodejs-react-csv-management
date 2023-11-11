@@ -2,6 +2,14 @@
 
 This is a full-stack web application that allows users to load a CSV file, display the data as cards on the website, and search through the loaded CSV data. The application consists of both a frontend and a backend component.
 
+## Accessing the Deployed Application
+
+The frontend of this application has been deployed and is accessible at the following URL:
+
+[Shaw and Partners Test Frontend](https://shawandpartners-test-frontend.vercel.app/)
+
+Please visit the provided link to interact with the deployed application.
+
 ## Table of Contents
 - [Features](#features)
 - [Project Structure](#project-structure)
