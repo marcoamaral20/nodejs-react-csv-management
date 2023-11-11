@@ -31,7 +31,7 @@ describe('CsvUploader', () => {
         fireEvent.click(uploadButton);
 
         await waitFor(() => {
-            expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/files', expect.any(FormData));
+            expect(axios.post).toHaveBeenCalledWith('https://shawandparterns-backend.onrender.com/api/files', expect.any(FormData));
         });
     });
 });
