@@ -4,7 +4,7 @@ This is a full-stack web application that allows users to load a CSV file, displ
 
 ## Accessing the Deployed Application
 
-The frontend of this application has been deployed and is accessible at the following URL:
+The frontend of this application has been deployed in https://vercel.com/ and is accessible at the following URL:
 
 [Shaw and Partners Test Frontend](https://shawandpartners-test-frontend.vercel.app/)
 
