@@ -110,7 +110,7 @@ The frontend will be accessible at `http://localhost:4000/`.
 - Search through the loaded CSV data.
 - Query Parameter: `q` for search terms.
 
-### `GET /api/clear`
+### `DELETE /api/clear`
 - Clear the data if exists.
 
 ## CSV Data Structure
