@@ -36,6 +36,20 @@ router.post('/api/files', multerConfig.single('file'), validateFileUpload, async
     }
 })
 
+router.delete('/api/clear', async (request: Request, response: Response) => {
+    try {
+        if (csvData.length === 0) {
+            return response.status(200).json({ message: 'No data to clear' });
+        }
+
+        csvData.length = 0;
+
+        return response.status(200).json({ message: 'The data was cleared successfully.' });
+    } catch (error) {
+        return response.status(500).json({ message: 'Internal Server Error.' });
+    }
+})
+
 router.get('/api/users', (req: Request, res: Response) => {
     try {
         const query = req.query.q as string;
