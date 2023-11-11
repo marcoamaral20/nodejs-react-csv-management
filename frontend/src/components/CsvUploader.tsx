@@ -21,13 +21,16 @@ const CsvUploader: React.FC = () => {
     const [fileInvalid, setFileInvalid] = useState<boolean>(false);
     const [messageError, setMessageHere] = useState<string>('');
 
+    const API_BASE_URL_LOCAL = process.env.REACT_APP_API_BASE_URL_LOCAL || 'http://localhost:3000';
+    const API_BASE_URL_RENDER = process.env.REACT_APP_API_BASE_URL_RENDER || 'https://shawandparterns-backend.onrender.com';
+
     const uploadFile = async () => {
         try {
             if (file) {
                 const formData = new FormData();
                 formData.append('file', file);
 
-                const response = await axios.post('http://localhost:3000/api/files', formData);
+                const response = await axios.post(`${API_BASE_URL_RENDER}/api/files`, formData);
 
                 if (response.status === 200) {
                     await fetchUsersData();
@@ -43,7 +46,7 @@ const CsvUploader: React.FC = () => {
 
     const fetchUsersData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/users?q=${searchTerm}`);
+            const response = await axios.get(`${API_BASE_URL_LOCAL}/api/users?q=${searchTerm}`);
             setCsvData(response.data.data || []);
         } catch (error: any) {
             handleFetchDataError(error);
