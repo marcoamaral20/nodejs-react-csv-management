@@ -8,6 +8,14 @@ The frontend of this application has been deployed in https://vercel.com/ and is
 
 [Shaw and Partners Test Frontend](https://shawandpartners-test-frontend.vercel.app/)
 
+---
+
+The backend of this application has been deployed in https://render.com/ and is accessible at the following URL:
+
+[Shaw and Partners Test Backend](https://shawandparterns-backend.onrender.com/)
+
+---
+
 Please visit the provided link to interact with the deployed application.
 
 ## Table of Contents
