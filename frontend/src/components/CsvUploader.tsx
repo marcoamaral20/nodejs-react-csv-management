@@ -11,7 +11,7 @@ import {
     Title,
     Body,
     CardWrapper,
-    Div, // Rename to avoid naming conflicts
+    Div,
 } from './style/StyledComponents';
 
 const CsvUploader: React.FC = () => {
@@ -21,8 +21,7 @@ const CsvUploader: React.FC = () => {
     const [fileInvalid, setFileInvalid] = useState<boolean>(false);
     const [messageError, setMessageHere] = useState<string>('');
 
-    const API_BASE_URL_LOCAL = process.env.REACT_APP_API_BASE_URL_LOCAL || 'http://localhost:3000';
-    const API_BASE_URL_RENDER = process.env.REACT_APP_API_BASE_URL_RENDER || 'https://shawandparterns-backend.onrender.com';
+    const url = 'https://shawandparterns-backend.onrender.com';
 
     const uploadFile = async () => {
         try {
@@ -30,7 +29,7 @@ const CsvUploader: React.FC = () => {
                 const formData = new FormData();
                 formData.append('file', file);
 
-                const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_RENDER}/api/files`, formData);
+                const response = await axios.post(`${url}/api/files`, formData);
 
                 if (response.status === 200) {
                     await fetchUsersData();
@@ -44,9 +43,21 @@ const CsvUploader: React.FC = () => {
         }
     };
 
+    const clearData = async () => {
+        try {
+            const response = await axios.delete(`${url}/api/clear`);
+            alert('Data cleared successfully');
+            if (response.status === 200) {
+                setCsvData([]);
+            }
+        } catch (error: any) {
+            handleFetchDataError(error);
+        }
+    }
+
     const fetchUsersData = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL_RENDER}/api/users?q=${searchTerm}`);
+            const response = await axios.get(`${url}/api/users?q=${searchTerm}`);
             setCsvData(response.data.data || []);
         } catch (error: any) {
             handleFetchDataError(error);
@@ -82,6 +93,9 @@ const CsvUploader: React.FC = () => {
                     <FileUploader onFileChange={setFile} />
                     <Button variant="primary" onClick={uploadFile} data-testid="upload-button" disabled={!file}>
                         Upload
+                    </Button>
+                    <Button variant="danger" onClick={clearData} data-testid="clear-button" disabled={csvData.length === 0}>
+                        Clear
                     </Button>
                 </Div>
 
