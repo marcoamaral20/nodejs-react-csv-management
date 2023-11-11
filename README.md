@@ -28,6 +28,7 @@ This is a full-stack web application that allows users to load a CSV file, displ
 - Endpoint to clear data.
 
 ## Project Structure
+```
 ├── backend
 │ ├── src
 │ │ ├── interface
@@ -46,6 +47,7 @@ This is a full-stack web application that allows users to load a CSV file, displ
 | | └── index.tsx
 │ └── package.json
 |_________________
+```
 
 
 ## Setup
