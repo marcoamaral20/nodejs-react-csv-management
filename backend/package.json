@@ -5,7 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "dev": "npx ts-node src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
