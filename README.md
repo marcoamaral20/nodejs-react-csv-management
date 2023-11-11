@@ -14,8 +14,6 @@ The backend of this application has been deployed in https://render.com/ and is 
 
 [Shaw and Partners Test Backend](https://shawandparterns-backend.onrender.com/)
 
----
-
 Please visit the provided link to interact with the deployed application.
 
 ## Table of Contents
