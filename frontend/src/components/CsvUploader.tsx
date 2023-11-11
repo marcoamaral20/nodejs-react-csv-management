@@ -30,7 +30,7 @@ const CsvUploader: React.FC = () => {
                 const formData = new FormData();
                 formData.append('file', file);
 
-                const response = await axios.post(`${API_BASE_URL_RENDER}/api/files`, formData);
+                const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_RENDER}/api/files`, formData);
 
                 if (response.status === 200) {
                     await fetchUsersData();
@@ -46,7 +46,7 @@ const CsvUploader: React.FC = () => {
 
     const fetchUsersData = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL_LOCAL}/api/users?q=${searchTerm}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL_RENDER}/api/users?q=${searchTerm}`);
             setCsvData(response.data.data || []);
         } catch (error: any) {
             handleFetchDataError(error);
